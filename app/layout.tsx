@@ -14,8 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://gbadegesin.com"),
   title: {
-    default: "Gbadegesin Mariam Omowumi | Senior Data Analyst & BI Engineer Portfolio",
+    default: "Gbadegesin Mariam Omowumi | Data Analyst & BI Engineer Portfolio",
     template: "%s | Gbadegesin Mariam Omowumi"
   },
   description: "Explore the Senior Data Analyst portfolio of Gbadegesin Mariam Omowumi, based in Lagos, Nigeria. Specializing in SQL performance optimization, predictive machine learning models, ETL pipelines, and interactive BI dashboards.",
@@ -43,10 +44,10 @@ export const metadata: Metadata = {
     siteName: "Gbadegesin Mariam Omowumi Portfolio",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200",
-        width: 1200,
-        height: 630,
-        alt: "Gbadegesin Mariam Omowumi Portfolio Preview",
+        url: "/mariam.jpeg",
+        width: 800,
+        height: 800,
+        alt: "Gbadegesin Mariam Omowumi",
       }
     ],
   },
@@ -55,7 +56,7 @@ export const metadata: Metadata = {
     title: "Gbadegesin Mariam Omowumi | Senior Data Analyst & BI Engineer",
     description: "Interactive data analytics cases, SQL benchmarks, and predictive metrics visualizations.",
     creator: "@gbadegesin",
-    images: ["https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200"],
+    images: ["/mariam.jpeg"],
   },
   alternates: {
     canonical: "https://gbadegesin.com",
