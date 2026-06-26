@@ -29,11 +29,12 @@ export default function ResumePage() {
             <span>Print / Save PDF</span>
           </button>
           <a
-            href="#"
+            href="/Gbadegesin-mariam-omowumi.pdf"
+            download="Gbadegesin-mariam-omowumi.pdf"
             className="inline-flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition-all shadow-md"
           >
             <Download className="w-4 h-4" />
-            <span>Download DOCX</span>
+            <span>Download PDF CV</span>
           </a>
         </div>
       </div>

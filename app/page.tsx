@@ -128,7 +128,7 @@ export default async function Home() {
     },
     "sameAs": [
       "https://github.com/Kanyin-D-analyst",
-      "https://linkedin.com"
+      "https://www.linkedin.com/in/mariam-gbadegesin"
     ],
     "knowsAbout": [
       "SQL Performance Optimization",

@@ -62,7 +62,7 @@ export function Navbar() {
           </div>
 
           {/* Desktop Actions */}
-          <div className="hidden md:flex items-center space-x-4">
+          {/* <div className="hidden md:flex items-center space-x-4">
             <ThemeSwitcher />
             <Link
               href="/admin"
@@ -71,7 +71,7 @@ export function Navbar() {
               <User className="w-4 h-4" />
               <span>Admin</span>
             </Link>
-          </div>
+          </div> */}
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-2">
@@ -106,7 +106,7 @@ export function Navbar() {
                 {link.name}
               </a>
             ))}
-            <div className="pt-4 pb-2 border-t border-border/20">
+            {/* <div className="pt-4 pb-2 border-t border-border/20">
               <Link
                 href="/admin"
                 onClick={() => setIsOpen(false)}
@@ -115,7 +115,7 @@ export function Navbar() {
                 <User className="w-4 h-4" />
                 <span>Admin Panel</span>
               </Link>
-            </div>
+            </div> */}
           </motion.div>
         )}
       </AnimatePresence>
