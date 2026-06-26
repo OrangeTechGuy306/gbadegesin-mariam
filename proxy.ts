@@ -9,6 +9,13 @@ const authRoutes = ['/login'];
 export async function proxy(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
+  // If request has clear or logout parameter, delete session cookie and let it pass to login
+  if (request.nextUrl.searchParams.has('clear') || request.nextUrl.searchParams.has('logout')) {
+    const response = NextResponse.next();
+    response.cookies.delete('session');
+    return response;
+  }
+
   // Determine matching routes
   const isProtectedRoute = protectedRoutes.some((route) => path.startsWith(route));
   const isAuthRoute = authRoutes.some((route) => path.startsWith(route));

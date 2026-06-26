@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic';
 export default async function MessagesAdminPage() {
   const user = await getCurrentUser();
   if (!user || (user.role !== 'SUPER_ADMIN' && user.role !== 'ADMIN' && user.role !== 'EDITOR')) {
-    redirect('/login');
+    redirect('/login?clear=1');
   }
 
   await connectDB();

@@ -39,7 +39,7 @@ export default async function AdminLayout({
   const user = await getCurrentUser();
 
   if (!user) {
-    redirect('/login');
+    redirect('/login?clear=1');
   }
 
   const authorizedLinks = sidebarLinks.filter(

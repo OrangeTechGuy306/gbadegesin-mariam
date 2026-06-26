@@ -10,7 +10,7 @@ export const dynamic = 'force-dynamic';
 export default async function ProfileAdminPage() {
   const user = await getCurrentUser();
   if (!user || (user.role !== 'SUPER_ADMIN' && user.role !== 'ADMIN')) {
-    redirect('/login');
+    redirect('/login?clear=1');
   }
 
   await connectDB();
