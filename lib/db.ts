@@ -30,14 +30,12 @@ async function connectDB() {
     };
 
     console.log('Initiating database connection to MongoDB...');
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then(async (mongooseInstance) => {
+    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongooseInstance) => {
       console.log('Database connected successfully.');
-      // Seed initial data asynchronously on successful DB connection
-      try {
-        await seedDatabase();
-      } catch (err) {
+      // Seed initial data asynchronously without blocking the connection resolution
+      seedDatabase().catch((err) => {
         console.error('Database seeding failed:', err);
-      }
+      });
       return mongooseInstance;
     }).catch((err) => {
       console.error('Mongoose connection promise rejected:', err.message);

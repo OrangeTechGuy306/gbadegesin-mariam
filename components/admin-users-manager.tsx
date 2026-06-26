@@ -356,7 +356,7 @@ export function AdminUsersManager({ initialUsers, currentUserId }: AdminUsersMan
                 type="submit"
                 className="w-full py-3 rounded-xl bg-primary text-primary-foreground font-bold text-xs hover:opacity-90 transition-opacity flex items-center justify-center space-x-1 shadow-md"
               >
-                <span>Save User Account</span>
+                <span>{isSubmitting ? 'Saving Account...' : 'Save User Account'}</span>
               </button>
             </form>
           </div>

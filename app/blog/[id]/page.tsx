@@ -1,13 +1,22 @@
 import connectDB from '@/lib/db';
 import Blog from '@/models/blog';
 import { BlogDetailView } from '@/components/blog-detail-view';
-import { incrementBlogViewsAction } from '@/server/actions/blog';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import mongoose from 'mongoose';
 import { fallbackBlogs } from '@/lib/fallback-data';
+import { cache } from 'react';
 
 export const dynamic = 'force-dynamic';
+
+// Request-scoped cache to deduplicate database queries between metadata and rendering
+const getBlog = cache(async (id: string) => {
+  await connectDB();
+  if (mongoose.Types.ObjectId.isValid(id)) {
+    return await Blog.findById(id).lean();
+  }
+  return null;
+});
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -18,10 +27,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   let blog: any = null;
   try {
-    const conn = await connectDB();
-    if (conn && mongoose.Types.ObjectId.isValid(id)) {
-      blog = await Blog.findById(id).lean();
-    }
+    blog = await getBlog(id);
   } catch (e) {
     console.error('Error fetching blog metadata from database:', e);
   }
@@ -68,12 +74,9 @@ export default async function BlogDetailPage({ params }: PageProps) {
   let isFromDb = false;
 
   try {
-    const conn = await connectDB();
-    if (conn && mongoose.Types.ObjectId.isValid(id)) {
-      blog = await Blog.findById(id).lean();
-      if (blog) {
-        isFromDb = true;
-      }
+    blog = await getBlog(id);
+    if (blog) {
+      isFromDb = true;
     }
   } catch (err) {
     console.error('Error fetching blog from database inside BlogDetailPage:', err);
@@ -86,15 +89,6 @@ export default async function BlogDetailPage({ params }: PageProps) {
 
   if (!blog) {
     notFound();
-  }
-
-  // Increment view counter if retrieved from live database
-  if (isFromDb) {
-    try {
-      await incrementBlogViewsAction(id);
-    } catch (err) {
-      console.error('Failed to increment blog views in DB:', err);
-    }
   }
 
   // Format serializable fields for client boundary passing

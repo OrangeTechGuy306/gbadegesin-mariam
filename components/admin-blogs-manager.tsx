@@ -207,7 +207,7 @@ export function AdminBlogsManager({ initialBlogs }: AdminBlogsManagerProps) {
                 className="w-full py-3 rounded-xl bg-primary text-primary-foreground font-semibold text-xs hover:opacity-90 transition-opacity flex items-center justify-center space-x-1 shadow-md"
               >
                 <FileText className="w-4 h-4" />
-                <span>Publish Article</span>
+                <span>{isSubmitting ? 'Publishing...' : 'Publish Article'}</span>
               </button>
             </form>
           </div>

@@ -24,7 +24,6 @@ import {
   fallbackBlogs,
 } from '@/lib/fallback-data';
 
-export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   let skills: any[] = [];

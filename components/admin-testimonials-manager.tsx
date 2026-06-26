@@ -249,7 +249,7 @@ export function AdminTestimonialsManager({ initialTestimonials }: AdminTestimoni
                 type="submit"
                 className="w-full py-3 rounded-xl bg-primary text-primary-foreground font-semibold text-xs hover:opacity-90 transition-opacity flex items-center justify-center space-x-1 shadow-md"
               >
-                <span>Save Testimonial</span>
+                <span>{isSubmitting ? 'Saving...' : 'Save Testimonial'}</span>
               </button>
             </form>
           </div>

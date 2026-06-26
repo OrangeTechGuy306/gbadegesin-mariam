@@ -4,7 +4,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Calendar, Eye, Heart, Share2, MessageSquare, Send, CheckCircle2, Copy } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { addCommentAction, likeBlogAction } from '@/server/actions/blog';
+import { addCommentAction, likeBlogAction, incrementBlogViewsAction } from '@/server/actions/blog';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -54,6 +54,19 @@ export function BlogDetailView({ blog }: BlogDetailViewProps) {
   } = useForm<CommentFormValues>({
     resolver: zodResolver(commentFormSchema),
   });
+
+  React.useEffect(() => {
+    const triggerViewIncrement = async () => {
+      if (blog._id && blog._id.length === 24) {
+        try {
+          await incrementBlogViewsAction(blog._id);
+        } catch (err) {
+          console.error('Failed to increment views asynchronously:', err);
+        }
+      }
+    };
+    triggerViewIncrement();
+  }, [blog._id]);
 
   const handleLike = async () => {
     if (hasLiked) return;

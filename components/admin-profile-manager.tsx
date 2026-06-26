@@ -545,7 +545,7 @@ export function AdminProfileManager({ initialExperiences, initialCertifications 
                 type="submit"
                 className="w-full py-3 rounded-xl bg-primary text-primary-foreground font-bold text-xs hover:opacity-90 transition-opacity flex items-center justify-center space-x-1 shadow-md"
               >
-                <span>Save Career Timeline Item</span>
+                <span>{isSubmittingExp ? 'Saving Item...' : 'Save Career Timeline Item'}</span>
               </button>
             </form>
           </div>
@@ -657,7 +657,7 @@ export function AdminProfileManager({ initialExperiences, initialCertifications 
                 type="submit"
                 className="w-full py-3 rounded-xl bg-primary text-primary-foreground font-bold text-xs hover:opacity-90 transition-opacity flex items-center justify-center space-x-1 shadow-md"
               >
-                <span>Save Certification</span>
+                <span>{isSubmittingCert ? 'Saving Certification...' : 'Save Certification'}</span>
               </button>
             </form>
           </div>
