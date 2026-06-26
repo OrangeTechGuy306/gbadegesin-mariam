@@ -18,8 +18,9 @@ export function Hero() {
   
   React.useEffect(() => {
     let i = 0;
+    setDisplayText('');
     const interval = setInterval(() => {
-      setDisplayText((prev) => prev + textToType.charAt(i));
+      setDisplayText(textToType.slice(0, i + 1));
       i++;
       if (i >= textToType.length) {
         clearInterval(interval);
