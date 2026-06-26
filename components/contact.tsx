@@ -127,7 +127,7 @@ export function Contact() {
               </div>
               <h3 className="text-lg font-bold text-foreground">Message Sent Successfully!</h3>
               <p className="text-xs text-muted-foreground max-w-xs mx-auto">
-                Thank you for reaching out. Gbade will review your message and reply via email within 24 hours.
+                Thank you for reaching out. Mariam will review your message and reply via email within 24 hours.
               </p>
               <button
                 onClick={() => setIsSuccess(false)}

@@ -43,7 +43,7 @@ export default function ResumePage() {
         {/* Header Grid */}
         <header className="border-b border-border/60 pb-8 grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
           <div className="md:col-span-2 space-y-2">
-            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">Gbade Gesin</h1>
+            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">Gbadegesin Mariam Omowumi</h1>
             <p className="text-sm font-bold text-primary tracking-wide uppercase">Senior Data Analyst / BI Engineer</p>
             <p className="text-xs text-muted-foreground leading-relaxed max-w-lg">
               Results-oriented Data Analyst with 5+ years of experience building statistical modeling pipelines, transactional data cohorts, ETL frameworks, and interactive business intelligence tools.

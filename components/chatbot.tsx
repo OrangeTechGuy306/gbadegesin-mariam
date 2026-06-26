@@ -10,18 +10,18 @@ interface Message {
 }
 
 const botReplies: Record<string, string> = {
-  skills: "Gbade's core skills cover SQL (PostgreSQL, BigQuery), Python (Pandas, NumPy, Scikit-Learn), Power BI, Tableau, ETL (Airflow, dbt), A/B testing, and machine learning models.",
-  experience: "Gbade is currently a Senior Data Analyst at Stripe (managing BigQuery pipelines & transactional models) and formerly at Vercel (developing conversion tracking and infrastructure dashboards).",
-  projects: "Gbade's featured projects include an E-Commerce Interactive Revenue Dashboard, a Customer Churn Predictor utilizing XGBoost, and cohort analysis pipelines. See the 'Projects' section for details!",
-  contact: "You can reach Gbade directly by completing the Contact Form below, or by email at mariamgbadegesin15@gmail.com. He is active on LinkedIn and GitHub as well.",
-  education: "Gbade holds a Master of Science in Data Analytics and certifications including Google Data Analytics Professional, Microsoft Certified Power BI Associate, and Tableau Desktop Specialist.",
-  default: "I'm Gbade's AI Assistant. Ask me about his 'skills', 'experience', 'projects', 'education', or how to 'contact' him!"
+  skills: "Mariam's core skills cover SQL (PostgreSQL, BigQuery), Python (Pandas, NumPy, Scikit-Learn), Power BI, Tableau, ETL (Airflow, dbt), A/B testing, and machine learning models.",
+  experience: "Mariam is currently a Senior Data Analyst at Stripe (managing BigQuery pipelines & transactional models) and formerly at Vercel (developing conversion tracking and infrastructure dashboards).",
+  projects: "Mariam's featured projects include an E-Commerce Interactive Revenue Dashboard, a Customer Churn Predictor utilizing XGBoost, and cohort analysis pipelines. See the 'Projects' section for details!",
+  contact: "You can reach Mariam directly by completing the Contact Form below, or by email at mariamgbadegesin15@gmail.com. She is active on LinkedIn and GitHub as well.",
+  education: "Mariam holds a Master of Science in Data Analytics and certifications including Google Data Analytics Professional, Microsoft Certified Power BI Associate, and Tableau Desktop Specialist.",
+  default: "I'm Mariam's AI Assistant. Ask me about her 'skills', 'experience', 'projects', 'education', or how to 'contact' her!"
 };
 
 export function Chatbot() {
   const [isOpen, setIsOpen] = React.useState(false);
   const [messages, setMessages] = React.useState<Message[]>([
-    { sender: 'bot', text: "Hello! I'm Gbade's AI Assistant. Ask me anything about his credentials, portfolio, or career history!" }
+    { sender: 'bot', text: "Hello! I'm Mariam's AI Assistant. Ask me anything about her credentials, portfolio, or career history!" }
   ]);
   const [inputValue, setInputValue] = React.useState('');
   const [isTyping, setIsTyping] = React.useState(false);
@@ -89,7 +89,7 @@ export function Chatbot() {
                 <Bot className="w-5 h-5" />
                 <div>
                   <h4 className="text-sm font-semibold leading-none flex items-center space-x-1">
-                    <span>Gbade Assistant</span>
+                    <span>Mariam Assistant</span>
                     <Sparkles className="w-3.5 h-3.5 text-amber-300 fill-amber-300" />
                   </h4>
                   <span className="text-[10px] opacity-75">Online • AI Bot</span>

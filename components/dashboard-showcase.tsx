@@ -62,7 +62,7 @@ export function DashboardShowcase() {
             Interactive Dashboard Showcase
           </h2>
           <p className="mt-4 text-base text-muted-foreground">
-            Explore Gbade's live dashboard simulation highlighting sales conversion trends, channel distribution models, and regional growth metrics.
+            Explore Mariam's live dashboard simulation highlighting sales conversion trends, channel distribution models, and regional growth metrics.
           </p>
         </div>
 

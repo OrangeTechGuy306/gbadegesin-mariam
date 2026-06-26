@@ -122,7 +122,7 @@ export function BlogDetailView({ blog }: BlogDetailViewProps) {
 
   const getTwitterShareUrl = () => {
     const url = encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '');
-    const text = encodeURIComponent(`Check out "${blog.title}" by Gbade Gesin: `);
+    const text = encodeURIComponent(`Check out "${blog.title}" by Gbadegesin Mariam Omowumi: `);
     return `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
   };
 

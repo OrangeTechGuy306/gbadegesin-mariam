@@ -43,7 +43,7 @@ export function Navbar() {
               <Database className="w-5 h-5" />
             </div>
             <span className="tracking-tight font-sans">
-              Gbade<span className="text-primary">.data</span>
+              Mariam<span className="text-primary">.data</span>
             </span>
           </Link>
 

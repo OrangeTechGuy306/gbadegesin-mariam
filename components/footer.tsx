@@ -13,7 +13,7 @@ export function Footer() {
                 <Database className="w-5 h-5" />
               </div>
               <span className="tracking-tight font-sans">
-                Gbade<span className="text-primary">.data</span>
+                Mariam<span className="text-primary">.data</span>
               </span>
             </Link>
             <p className="text-muted-foreground text-sm max-w-sm">
@@ -68,7 +68,7 @@ export function Footer() {
         </div>
 
         <div className="mt-8 pt-8 border-t border-border/20 flex flex-col sm:flex-row items-center justify-between text-xs text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Gbade Gesin. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Gbadegesin Mariam Omowumi. All rights reserved.</p>
           <div className="flex space-x-4 mt-4 sm:mt-0">
             <a href="#" className="hover:underline">Privacy Policy</a>
             <a href="#" className="hover:underline">Terms of Service</a>

@@ -15,14 +15,14 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Gbade Gesin | Senior Data Analyst & BI Engineer Portfolio",
-    template: "%s | Gbade Gesin"
+    default: "Gbadegesin Mariam Omowumi | Senior Data Analyst & BI Engineer Portfolio",
+    template: "%s | Gbadegesin Mariam Omowumi"
   },
-  description: "Explore the Senior Data Analyst portfolio of Gbade Gesin, based in Lagos, Nigeria. Specializing in SQL performance optimization, predictive machine learning models, ETL pipelines, and interactive BI dashboards.",
+  description: "Explore the Senior Data Analyst portfolio of Gbadegesin Mariam Omowumi, based in Lagos, Nigeria. Specializing in SQL performance optimization, predictive machine learning models, ETL pipelines, and interactive BI dashboards.",
   keywords: ["Data Analyst", "BI Engineer", "Business Intelligence", "SQL Performance", "BigQuery", "Python", "Tableau", "Power BI", "Cohort Analysis", "Machine Learning Portfolio"],
-  authors: [{ name: "Gbade Gesin", url: "https://gbadegesin.com" }],
-  creator: "Gbade Gesin",
-  publisher: "Gbade Gesin",
+  authors: [{ name: "Gbadegesin Mariam Omowumi", url: "https://gbadegesin.com" }],
+  creator: "Gbadegesin Mariam Omowumi",
+  publisher: "Gbadegesin Mariam Omowumi",
   robots: {
     index: true,
     follow: true,
@@ -38,21 +38,21 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://gbadegesin.com",
-    title: "Gbade Gesin | Senior Data Analyst & BI Engineer Portfolio",
+    title: "Gbadegesin Mariam Omowumi | Senior Data Analyst & BI Engineer Portfolio",
     description: "Senior Data Analyst portfolio showcasing SQL optimization, customer segment cohorts, ETL, and interactive dashboard mockups.",
-    siteName: "Gbade Gesin Portfolio",
+    siteName: "Gbadegesin Mariam Omowumi Portfolio",
     images: [
       {
         url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200",
         width: 1200,
         height: 630,
-        alt: "Gbade Gesin Portfolio Preview",
+        alt: "Gbadegesin Mariam Omowumi Portfolio Preview",
       }
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Gbade Gesin | Senior Data Analyst & BI Engineer",
+    title: "Gbadegesin Mariam Omowumi | Senior Data Analyst & BI Engineer",
     description: "Interactive data analytics cases, SQL benchmarks, and predictive metrics visualizations.",
     creator: "@gbadegesin",
     images: ["https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200"],

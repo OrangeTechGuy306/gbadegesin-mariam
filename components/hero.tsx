@@ -42,7 +42,7 @@ export function Hero() {
           className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-secondary/80 border border-border/60 text-xs text-primary font-medium"
         >
           <Database className="w-3.5 h-3.5" />
-          <span>Gbade Gesin • Senior Data Analyst</span>
+          <span>Gbadegesin Mariam Omowumi • Senior Data Analyst</span>
         </motion.div>
 
         {/* Headline */}

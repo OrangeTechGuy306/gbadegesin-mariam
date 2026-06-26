@@ -57,7 +57,7 @@ export default async function AdminLayout({
               <Database className="w-5 h-5" />
             </div>
             <span className="tracking-tight font-sans">
-              Gbade<span className="text-primary">.admin</span>
+              Mariam<span className="text-primary">.admin</span>
             </span>
           </Link>
 

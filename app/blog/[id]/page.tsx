@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!blog) {
     return {
-      title: "Article Not Found | Gbade Gesin",
+      title: "Article Not Found | Gbadegesin Mariam Omowumi",
     };
   }
 

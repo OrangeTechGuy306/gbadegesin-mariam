@@ -49,7 +49,7 @@ export default function LoginPage() {
                 type="email"
                 autoComplete="email"
                 required
-                placeholder="admin@gbadegesin.com"
+                placeholder="admin@mariamgbadegesin.com"
                 className="w-full pl-10 pr-4 py-2.5 border border-border/60 rounded-xl bg-secondary/15 text-xs focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
               />
             </div>

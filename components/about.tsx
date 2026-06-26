@@ -64,7 +64,7 @@ export function About({ initialExperiences }: AboutProps) {
           <div className="space-y-2">
             <span className="text-xs font-bold text-primary tracking-widest uppercase">Career Story</span>
             <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl text-foreground">
-              About Gbade Gesin
+              About Gbadegesin Mariam Omowumi
             </h2>
           </div>
           <p className="text-muted-foreground text-sm leading-relaxed">

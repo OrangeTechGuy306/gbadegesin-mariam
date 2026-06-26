@@ -316,7 +316,7 @@ export function AdminUsersManager({ initialUsers, currentUserId }: AdminUsersMan
                 <input
                   type="email"
                   {...register('email')}
-                  placeholder="e.g. admin@gbadegesin.com"
+                  placeholder="e.g. admin@mariamgbadegesin.com"
                   className="w-full px-3 py-2.5 border border-border/60 rounded-xl bg-secondary/15 text-xs focus:outline-none focus:ring-1 focus:ring-primary"
                 />
                 {errors.email && <p className="text-[10px] text-red-500">{errors.email.message}</p>}

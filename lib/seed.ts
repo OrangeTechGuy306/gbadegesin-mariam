@@ -17,12 +17,12 @@ export async function seedDatabase() {
   // 1. Seed Super Admin if none exists
   const userCount = await User.countDocuments();
   if (userCount === 0) {
-    const adminEmail = process.env.SUPER_ADMIN_EMAIL || 'admin@gbadegesin.com';
+    const adminEmail = process.env.SUPER_ADMIN_EMAIL || 'admin@mariamgbadegesin.com';
     const adminPassword = process.env.SUPER_ADMIN_PASSWORD || 'AdminPassword123!';
     const hashedPassword = await bcrypt.hash(adminPassword, 10);
     
     await User.create({
-      name: 'Gbade Gesin',
+      name: 'Gbadegesin Mariam Omowumi',
       email: adminEmail,
       password: hashedPassword,
       role: 'SUPER_ADMIN',

@@ -1,4 +1,4 @@
-// Service Worker for GbadeData PWA and Push Notifications
+// Service Worker for MariamData PWA and Push Notifications
 
 self.addEventListener('push', function (event) {
   if (event.data) {

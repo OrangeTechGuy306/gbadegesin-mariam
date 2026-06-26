@@ -94,7 +94,7 @@ export const fallbackTestimonials = [
     name: 'Sarah Jenkins',
     role: 'Director of Growth',
     company: 'SaaSify Inc.',
-    text: 'Gbade transformed our raw sales data into actionable decisions. His Interactive dashboards and churn predictive models directly saved us thousands in customer acquisition costs.',
+    text: 'Mariam transformed our raw sales data into actionable decisions. His Interactive dashboards and churn predictive models directly saved us thousands in customer acquisition costs.',
     rating: 5,
     avatar: '',
   },
@@ -103,7 +103,7 @@ export const fallbackTestimonials = [
     name: 'Marcus Chen',
     role: 'VP of Product',
     company: 'DataFlow Systems',
-    text: 'An exceptional data professional. Gbade does not just write queries or build charts; he truly understands the business objectives and translates numbers into growth strategies.',
+    text: 'An exceptional data professional. Mariam does not just write queries or build charts; he truly understands the business objectives and translates numbers into growth strategies.',
     rating: 5,
     avatar: '',
   }

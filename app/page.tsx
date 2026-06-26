@@ -119,7 +119,7 @@ export default async function Home() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
-    "name": "Gbade Gesin",
+    "name": "Gbadegesin Mariam Omowumi",
     "jobTitle": "Senior Data Analyst & BI Engineer",
     "url": "https://gbadegesin.com",
     "address": {

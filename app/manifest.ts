@@ -2,8 +2,8 @@ import type { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Gbade Gesin Portfolio & Analytics Platform',
-    short_name: 'GbadeData',
+    name: 'Gbadegesin Mariam Omowumi Portfolio & Analytics Platform',
+    short_name: 'MariamData',
     description: 'Premium Data Analyst Portfolio and CMS Dashboard Console',
     start_url: '/',
     display: 'standalone',
