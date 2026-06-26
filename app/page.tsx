@@ -1,65 +1,164 @@
-import Image from "next/image";
+import connectDB from '@/lib/db';
+import Skill from '@/models/skill';
+import Project from '@/models/project';
+import Experience from '@/models/experience';
+import Testimonial from '@/models/testimonial';
+import BlogModel from '@/models/blog';
+import { ClientCanvas } from '@/components/client-canvas';
+import { Navbar } from '@/components/navbar';
+import { Hero } from '@/components/hero';
+import { About } from '@/components/about';
+import { Skills } from '@/components/skills';
+import { Projects } from '@/components/projects';
+import { DashboardShowcase } from '@/components/dashboard-showcase';
+import { Testimonials } from '@/components/testimonials';
+import { Blog } from '@/components/blog';
+import { Contact } from '@/components/contact';
+import { Footer } from '@/components/footer';
+import { Chatbot } from '@/components/chatbot';
 
-export default function Home() {
+export const dynamic = 'force-dynamic';
+
+export default async function Home() {
+  await connectDB();
+
+  // Query records
+  const skills = await Skill.find({}).lean();
+  const projects = await Project.find({}).sort({ createdAt: -1 }).lean();
+  const experiences = await Experience.find({}).sort({ startDate: -1 }).lean();
+  const testimonials = await Testimonial.find({}).sort({ createdAt: -1 }).lean();
+  const blogs = await BlogModel.find({ status: 'published' }).sort({ publishedAt: -1 }).lean();
+
+  // Format MongoDB items for safe client boundary passing
+  const formattedSkills = skills.map((s: any) => ({
+    name: s.name,
+    proficiency: s.proficiency,
+    category: s.category,
+    value: s.radarValue || 8,
+  }));
+
+  const formattedProjects = projects.map((p: any) => ({
+    _id: p._id.toString(),
+    title: p.title,
+    description: p.description,
+    problemStatement: p.problemStatement || '',
+    methodology: p.methodology || '',
+    dataset: p.dataset || '',
+    technologies: p.technologies || [],
+    results: p.results || '',
+    businessImpact: p.businessImpact || '',
+    coverImage: p.coverImage,
+    gallery: p.gallery || [],
+    liveUrl: p.liveUrl || '#',
+    githubUrl: p.githubUrl || '#',
+    category: p.category || 'General',
+    tags: p.tags || [],
+    featured: p.featured || false,
+  }));
+
+  const formattedExperiences = experiences.map((e: any) => ({
+    year: `${e.startDate} - ${e.endDate}`,
+    role: e.title,
+    company: e.company,
+    description: e.description || '',
+    type: e.type || 'work',
+  }));
+
+  const formattedTestimonials = testimonials.map((t: any) => ({
+    _id: t._id.toString(),
+    name: t.name,
+    role: t.role,
+    company: t.company,
+    text: t.text,
+    rating: t.rating || 5,
+    avatar: t.avatar || '',
+  }));
+
+  const formattedBlogs = blogs.map((b: any) => ({
+    _id: b._id.toString(),
+    title: b.title,
+    summary: b.summary,
+    category: b.category || 'General',
+    publishedAt: b.publishedAt ? new Date(b.publishedAt).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    }) : '',
+    views: b.views || 0,
+    likes: b.likes || 0,
+    coverImage: b.coverImage,
+  }));
+
+  // Schema.org JSON-LD Structured Data
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Gbade Gesin",
+    "jobTitle": "Senior Data Analyst & BI Engineer",
+    "url": "https://gbadegesin.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Lagos",
+      "addressCountry": "NG"
+    },
+    "sameAs": [
+      "https://github.com/Kanyin-D-analyst",
+      "https://linkedin.com"
+    ],
+    "knowsAbout": [
+      "SQL Performance Optimization",
+      "Cohort Analysis",
+      "Machine Learning Predictions",
+      "Business Intelligence Dashboards",
+      "ETL Pipelines"
+    ]
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <div className="relative min-h-screen flex flex-col">
+      {/* Schema.org Injection */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      
+      {/* 3D background canvas */}
+      <ClientCanvas />
+
+      {/* Navigation header */}
+      <Navbar />
+
+      <main className="flex-1">
+        {/* Hero Banner */}
+        <Hero />
+
+        {/* Biography & Timeline */}
+        <About initialExperiences={formattedExperiences} />
+
+        {/* Skills inventory */}
+        <Skills initialSkills={formattedSkills} />
+
+        {/* Projects listings */}
+        <Projects initialProjects={formattedProjects} />
+
+        {/* Analytics Interactive mockup dashboard */}
+        <DashboardShowcase />
+
+        {/* Testimonials */}
+        <Testimonials initialTestimonials={formattedTestimonials} />
+
+        {/* Blog grid */}
+        <Blog initialBlogs={formattedBlogs} />
+
+        {/* Form and bookings */}
+        <Contact />
       </main>
+
+      {/* Floating AI Agent Chatbot assistant */}
+      <Chatbot />
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
