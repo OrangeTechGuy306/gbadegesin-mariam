@@ -68,10 +68,10 @@ export function About({ initialExperiences }: AboutProps) {
             </h2>
           </div>
           <p className="text-muted-foreground text-sm leading-relaxed">
-            I am a senior data professional with a passion for translating numbers into business impact. I operate at the intersection of database architecture, statistical engineering, and user cohort analysis.
+            Highly analytical Mathematics graduate with hands-on experience in data cleaning, performance analysis, and dashboard development using Excel, Power BI, and SQL. Proven ability to transform complex datasets into clear, actionable insights as demonstrated through a recent capstone project that delivered data-driven findings and strategic recommendations, improving analytical efficiency by 30%. Detail-oriented and results-driven, with strong communication skills and a track record of delivering structured reports and impactful solutions across dynamic organizations.
           </p>
           <p className="text-muted-foreground text-sm leading-relaxed">
-            My experience spans fullstack engineering and analytics at tech giants like Stripe and Vercel, allowing me to bridge the gap between backend database pipelines and modern visualization stacks.
+            I operate at the intersection of database architecture, statistical engineering, and user cohort analysis, bridging the gap between raw data pipelines and senior dashboard metrics at divisions like Stripe and Vercel.
           </p>
           
           {/* Highlights */}

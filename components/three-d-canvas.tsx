@@ -96,8 +96,8 @@ function FloatingShapes() {
 
 export default function ThreeDCanvas() {
   return (
-    <div className="absolute inset-0 -z-10 w-full h-full bg-transparent overflow-hidden">
-      <Canvas camera={{ position: [0, 0, 1.8] }}>
+    <div className="fixed inset-0 -z-10 w-full h-screen bg-transparent overflow-hidden pointer-events-none">
+      <Canvas camera={{ position: [0, 0, 3.5], fov: 40 }}>
         <ambientLight intensity={0.5} />
         <directionalLight position={[1, 1, 1]} intensity={0.8} />
         <ParticleBackground />
