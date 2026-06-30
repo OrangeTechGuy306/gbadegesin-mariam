@@ -20,8 +20,14 @@ async function connectDB() {
     return null;
   }
 
-  if (cached.conn) {
+  if (cached.conn && mongoose.connection.readyState === 1) {
     return cached.conn;
+  }
+
+  // Reset cached connection and promise if the connection is not active (0: disconnected, 3: disconnecting)
+  if (mongoose.connection.readyState === 0 || mongoose.connection.readyState === 3) {
+    cached.conn = null;
+    cached.promise = null;
   }
 
   if (!cached.promise) {
