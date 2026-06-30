@@ -15,8 +15,8 @@ import {
 
 export async function seedDatabase() {
   // 1. Seed Super Admin if none exists
-  const userCount = await User.countDocuments();
-  if (userCount === 0) {
+  const superAdmin = await User.findOne({ role: 'SUPER_ADMIN' });
+  if (!superAdmin) {
     const adminEmail = process.env.SUPER_ADMIN_EMAIL || 'admin@mariamgbadegesin.com';
     const adminPassword = process.env.SUPER_ADMIN_PASSWORD || 'AdminPassword123!';
     const hashedPassword = await bcrypt.hash(adminPassword, 10);
@@ -31,48 +31,58 @@ export async function seedDatabase() {
     console.log('Seeded Super Admin user successfully!');
   }
 
-  // 2. Seed Skills if none exist
-  const skillCount = await Skill.countDocuments();
-  if (skillCount === 0) {
-    await Skill.insertMany(fallbackSkills);
-    console.log('Seeded initial skills database!');
+  // 2. Seed Skills if they do not exist
+  for (const skill of fallbackSkills) {
+    const exists = await Skill.findOne({ name: skill.name });
+    if (!exists) {
+      await Skill.create(skill);
+      console.log(`Seeded missing skill: ${skill.name}`);
+    }
   }
 
-  // 3. Seed Projects if none exist
-  const projectCount = await Project.countDocuments();
-  if (projectCount === 0) {
-    const projectsToSeed = fallbackProjects.map(({ _id, ...rest }) => rest);
-    await Project.insertMany(projectsToSeed);
-    console.log('Seeded initial projects database!');
+  // 3. Seed Projects if they do not exist
+  for (const proj of fallbackProjects) {
+    const exists = await Project.findOne({ title: proj.title });
+    if (!exists) {
+      const { _id, ...projectData } = proj;
+      await Project.create(projectData);
+      console.log(`Seeded missing project: ${proj.title}`);
+    }
   }
 
-  // 4. Seed Experiences if none exist
-  const experienceCount = await Experience.countDocuments();
-  if (experienceCount === 0) {
-    await Experience.insertMany(fallbackExperiences);
-    console.log('Seeded experience timeline data!');
+  // 4. Seed Experiences if they do not exist
+  for (const exp of fallbackExperiences) {
+    const exists = await Experience.findOne({ title: exp.title, company: exp.company });
+    if (!exists) {
+      await Experience.create(exp);
+      console.log(`Seeded missing experience: ${exp.title} at ${exp.company}`);
+    }
   }
 
-  // 5. Seed Testimonials if none exist
-  const testimonialCount = await Testimonial.countDocuments();
-  if (testimonialCount === 0) {
-    const testimonialsToSeed = fallbackTestimonials.map(({ _id, ...rest }) => rest);
-    await Testimonial.insertMany(testimonialsToSeed);
-    console.log('Seeded testimonials!');
+  // 5. Seed Testimonials if they do not exist
+  for (const testimonial of fallbackTestimonials) {
+    const exists = await Testimonial.findOne({ name: testimonial.name });
+    if (!exists) {
+      const { _id, ...testimonialData } = testimonial;
+      await Testimonial.create(testimonialData);
+      console.log(`Seeded missing testimonial from: ${testimonial.name}`);
+    }
   }
 
-  // 6. Seed Blogs if none exist
-  const blogCount = await Blog.countDocuments();
-  if (blogCount === 0) {
-    const blogsToSeed = fallbackBlogs.map(({ _id, ...rest }) => ({
-      ...rest,
-      publishedAt: rest.publishedAt ? new Date(rest.publishedAt) : new Date(),
-      comments: rest.comments?.map(({ _id, ...cRest }) => ({
-        ...cRest,
-        createdAt: cRest.createdAt ? new Date(cRest.createdAt) : new Date(),
-      })) || [],
-    }));
-    await Blog.insertMany(blogsToSeed);
-    console.log('Seeded initial blogs!');
+  // 6. Seed Blogs if they do not exist
+  for (const blog of fallbackBlogs) {
+    const exists = await Blog.findOne({ title: blog.title });
+    if (!exists) {
+      const { _id, ...blogData } = blog;
+      await Blog.create({
+        ...blogData,
+        publishedAt: blogData.publishedAt ? new Date(blogData.publishedAt) : new Date(),
+        comments: blogData.comments?.map(({ _id, ...cRest }) => ({
+          ...cRest,
+          createdAt: cRest.createdAt ? new Date(cRest.createdAt) : new Date(),
+        })) || [],
+      });
+      console.log(`Seeded missing blog: ${blog.title}`);
+    }
   }
 }

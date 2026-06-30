@@ -12,37 +12,6 @@ interface TimelineItem {
   type: 'work' | 'education' | 'award';
 }
 
-const defaultTimelineData: TimelineItem[] = [
-  {
-    year: '2024 - Present',
-    role: 'Senior Data Analyst',
-    company: 'Stripe Analytics Division',
-    description: 'Lead analytics model development, tracking settlement fees, pricing adjustments, and API usage cohorts globally.',
-    type: 'work',
-  },
-  {
-    year: '2022 - 2024',
-    role: 'Data Analyst II',
-    company: 'Vercel Performance Team',
-    description: 'Designed conversion tracking dashboards for user onboarding pipelines and monitored edge computing latencies.',
-    type: 'work',
-  },
-  {
-    year: '2020 - 2022',
-    role: 'Master of Science, Data Science',
-    company: 'University of California, Berkeley',
-    description: 'Specialization in cohort tracking, econometric modeling, and machine learning pipelines.',
-    type: 'education',
-  },
-  {
-    year: '2021',
-    role: 'Outstanding Analyst Award',
-    company: 'SaaS Analytics Coalition',
-    description: 'Recognized for discovering key revenue leaks in checkout gateways.',
-    type: 'award',
-  },
-];
-
 const highlights = [
   "Audited $10B+ pricing models",
   "Reduced pipeline latency by 35%",
@@ -55,7 +24,7 @@ interface AboutProps {
 }
 
 export function About({ initialExperiences }: AboutProps) {
-  const timelineData = initialExperiences && initialExperiences.length > 0 ? initialExperiences : defaultTimelineData;
+  const timelineData = initialExperiences || [];
   return (
     <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">

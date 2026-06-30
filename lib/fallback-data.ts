@@ -54,6 +54,26 @@ export const fallbackProjects = [
     category: 'Machine Learning',
     tags: ['Python', 'XGBoost', 'Customer Retention'],
     featured: true,
+  },
+  {
+    _id: '3',
+    title: 'High-Volume BigQuery ETL Pipeline',
+    description: 'Developed an automated pipeline feeding analytics views from streaming JSON logs in GCP.',
+    problemStatement: 'Raw clickstream data sat uncompressed, creating $5,000/mo query inefficiencies due to full table scans.',
+    methodology: 'Restructured ingestion with partitioned and clustered tables. Wrote dbt transformations scheduled in Apache Airflow.',
+    dataset: 'Clickstream Event Logs (1.2 billion rows)',
+    technologies: ['SQL', 'Python', 'ETL', 'GCP BigQuery', 'dbt'],
+    results: 'Reduced query runtime by 72% and lowered cloud billing charges by $3,200/mo.',
+    businessImpact: 'Enabled downstream analytics dashboards to refresh in near real-time (5-minute latency down from 24 hours).',
+    coverImage: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=600',
+    gallery: [
+      'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=600'
+    ],
+    liveUrl: '#',
+    githubUrl: '#',
+    category: 'SQL',
+    tags: ['ETL Pipeline', 'BigQuery Optimization', 'dbt Data Modeling'],
+    featured: true,
   }
 ];
 

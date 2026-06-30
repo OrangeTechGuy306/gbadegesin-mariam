@@ -22,61 +22,6 @@ interface Project {
   tags?: string[];
 }
 
-const defaultProjects: Project[] = [
-  {
-    _id: '1',
-    title: 'E-Commerce Interactive Revenue Analytics',
-    description: 'Designed a comprehensive analytics platform and dashboard to track monthly sales, regional performance, and client segment patterns.',
-    problemStatement: 'The sales team lacked real-time visibility into region-specific revenue shifts, leading to inefficient marketing allocations.',
-    methodology: 'Processed 5M records in BigQuery SQL, performed cohorts analysis in Pandas, and created interactive dashboards with trend modeling.',
-    dataset: 'Sales Transactions Dataset (2024-2026, 5.2 million records)',
-    technologies: ['SQL', 'Python', 'Power BI', 'Zustand', 'Recharts'],
-    results: 'Pinpointed three underperforming regional channels, enabling optimization campaigns that boosted conversions by 14%.',
-    businessImpact: 'Discovered a $1.2M annual leakage pattern in transaction processing fees, enabling contract re-negotiation.',
-    coverImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600',
-    gallery: [
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600',
-      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600'
-    ],
-    liveUrl: '#',
-    githubUrl: '#',
-    category: 'Power BI',
-  },
-  {
-    _id: '2',
-    title: 'Customer Churn Predictor & Segmentation Model',
-    description: 'Built an end-to-end Machine Learning pipeline to predict churn risk for users and segment customer behaviors.',
-    problemStatement: 'SaaS churn rates rose to 8.4% without clear indicators, causing loss in subscriber lifetime value.',
-    methodology: 'Cleaned raw system logs using Python, extracted behavioral features, trained XGBoost and Random Forest classifiers, and output predictions via API.',
-    dataset: 'Customer Activity Logs & Subscription Metadata (50,000 active profiles)',
-    technologies: ['Python', 'Machine Learning', 'SQL', 'Scikit-Learn'],
-    results: 'Achieved 89% precision (F1-score of 0.86) in predicting churn events 30 days before occurrence.',
-    businessImpact: 'Aided customer success teams in deploying proactive discount triggers, decreasing churn from 8.4% to 4.2% within one quarter.',
-    coverImage: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=600',
-    gallery: [
-      'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=600'
-    ],
-    liveUrl: '#',
-    githubUrl: '#',
-    category: 'Machine Learning',
-  },
-  {
-    _id: '3',
-    title: 'High-Volume BigQuery ETL Pipeline',
-    description: 'Developed an automated pipeline feeding analytics views from streaming JSON logs in GCP.',
-    problemStatement: 'Raw clickstream data sat uncompressed, creating $5,000/mo query inefficiencies due to full table scans.',
-    methodology: 'Restructured ingestion with partitioned and clustered tables. Wrote dbt transformations scheduled in Apache Airflow.',
-    dataset: 'Clickstream Event Logs (1.2 billion rows)',
-    technologies: ['SQL', 'Python', 'ETL', 'GCP BigQuery', 'dbt'],
-    results: 'Reduced query runtime by 72% and lowered cloud billing charges by $3,200/mo.',
-    businessImpact: 'Enabled downstream analytics dashboards to refresh in near real-time (5-minute latency down from 24 hours).',
-    coverImage: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=600',
-    liveUrl: '#',
-    githubUrl: '#',
-    category: 'SQL',
-  }
-];
-
 const categories = ['All', 'Power BI', 'Tableau', 'SQL', 'Python', 'Excel', 'Machine Learning'];
 
 interface ProjectsProps {
@@ -84,7 +29,7 @@ interface ProjectsProps {
 }
 
 export function Projects({ initialProjects }: ProjectsProps) {
-  const mockProjects = initialProjects && initialProjects.length > 0 ? initialProjects : defaultProjects;
+  const mockProjects = initialProjects || [];
   const [selectedProject, setSelectedProject] = React.useState<Project | null>(null);
   const [searchQuery, setSearchQuery] = React.useState('');
   const [activeCategory, setActiveCategory] = React.useState('All');

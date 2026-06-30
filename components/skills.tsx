@@ -4,21 +4,6 @@ import * as React from 'react';
 import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const defaultSkillsList = [
-  { name: 'SQL (PostgreSQL / BigQuery)', proficiency: 92, category: 'SQL', value: 9 },
-  { name: 'Python (Pandas / NumPy)', proficiency: 88, category: 'Python', value: 9 },
-  { name: 'Power BI Dashboards', proficiency: 85, category: 'Power BI', value: 8 },
-  { name: 'Tableau Visualizations', proficiency: 87, category: 'Tableau', value: 8 },
-  { name: 'Advanced Excel & VBA', proficiency: 80, category: 'Excel', value: 7 },
-  { name: 'R Programming', proficiency: 70, category: 'R', value: 6 },
-  { name: 'Statistical Modelling', proficiency: 85, category: 'Statistics', value: 8 },
-  { name: 'Machine Learning', proficiency: 75, category: 'Machine Learning', value: 7 },
-  { name: 'Data Cleaning', proficiency: 95, category: 'Data Cleaning', value: 10 },
-  { name: 'Data Visualization', proficiency: 90, category: 'Data Visualization', value: 10 },
-  { name: 'ETL Pipelines', proficiency: 82, category: 'ETL', value: 8 },
-  { name: 'Business Intelligence', proficiency: 88, category: 'Business Intelligence', value: 9 },
-];
-
 const categories = ['All', 'SQL', 'Python', 'Power BI', 'Tableau', 'Excel', 'Machine Learning', 'Data Cleaning', 'Data Visualization'];
 
 interface SkillItem {
@@ -33,7 +18,7 @@ interface SkillsProps {
 }
 
 export function Skills({ initialSkills }: SkillsProps) {
-  const skillsList = initialSkills && initialSkills.length > 0 ? initialSkills : defaultSkillsList;
+  const skillsList = initialSkills || [];
   const [activeCategory, setActiveCategory] = React.useState('All');
 
   const filteredSkills = activeCategory === 'All'

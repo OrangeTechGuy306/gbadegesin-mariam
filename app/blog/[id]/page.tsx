@@ -4,7 +4,6 @@ import { BlogDetailView } from '@/components/blog-detail-view';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import mongoose from 'mongoose';
-import { fallbackBlogs } from '@/lib/fallback-data';
 import { cache } from 'react';
 
 export const dynamic = 'force-dynamic';
@@ -33,10 +32,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     console.error('Error fetching blog metadata from database:', e);
   }
 
-  // Fallback to static articles if not found in live DB
-  if (!blog) {
-    blog = fallbackBlogs.find(b => b._id === id);
-  }
+
 
   if (!blog) {
     return {
@@ -83,11 +79,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
     console.error('Error fetching blog from database inside BlogDetailPage:', err);
   }
 
-  // Fallback to static articles if not found in live DB or DB connection failed
-  if (!blog) {
-    blog = fallbackBlogs.find(b => b._id === id);
-  }
-
+  // Fallback if not found in live DB or DB connection failed
   if (!blog) {
     notFound();
   }

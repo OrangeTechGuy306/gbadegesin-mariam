@@ -12,29 +12,12 @@ interface Testimonial {
   rating: number;
 }
 
-const defaultTestimonials: Testimonial[] = [
-  {
-    name: 'Sarah Jenkins',
-    role: 'Director of Growth',
-    company: 'SaaSify Inc.',
-    text: "Mariam transformed our sales telemetry data into strategic insights. His predictive churn modeling and interactive dashboards directly helped us optimize product conversion funnels.",
-    rating: 5,
-  },
-  {
-    name: 'Marcus Chen',
-    role: 'VP of Product',
-    company: 'DataFlow Systems',
-    text: "Mariam has a unique ability to bridge business objectives with complex queries. He builds data pipelines that don't just aggregate metrics, but tell a story of where the product is heading.",
-    rating: 5,
-  },
-];
-
 interface TestimonialsProps {
   initialTestimonials?: Testimonial[];
 }
 
 export function Testimonials({ initialTestimonials }: TestimonialsProps) {
-  const mockTestimonials = initialTestimonials && initialTestimonials.length > 0 ? initialTestimonials : defaultTestimonials;
+  const mockTestimonials = initialTestimonials || [];
   const [index, setIndex] = React.useState(0);
 
   React.useEffect(() => {

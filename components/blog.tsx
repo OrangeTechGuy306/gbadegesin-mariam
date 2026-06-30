@@ -16,36 +16,13 @@ interface Blog {
   coverImage: string;
 }
 
-const defaultBlogs: Blog[] = [
-  {
-    _id: '1',
-    title: 'Optimizing SQL Queries: Cohort Analysis Over 10M Rows',
-    summary: 'Discover how clustering, window functions, and partitioning reduced cloud query latency by 72% and saved thousands in monthly cloud costs.',
-    category: 'SQL Performance',
-    publishedAt: 'May 12, 2026',
-    views: 1240,
-    likes: 182,
-    coverImage: 'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=400',
-  },
-  {
-    _id: '2',
-    title: 'Understanding Customer Churn with XGBoost Predictions',
-    summary: 'A step-by-step methodology explaining predictive feature selection, hyperparameter tuning, and embedding models directly into CRM triggers.',
-    category: 'Machine Learning',
-    publishedAt: 'Apr 28, 2026',
-    views: 890,
-    likes: 98,
-    coverImage: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=400',
-  },
-];
-
 interface BlogProps {
   initialBlogs?: Blog[];
 }
 
 export function Blog({ initialBlogs }: BlogProps) {
   const [searchQuery, setSearchQuery] = React.useState('');
-  const mockBlogs = initialBlogs && initialBlogs.length > 0 ? initialBlogs : defaultBlogs;
+  const mockBlogs = initialBlogs || [];
 
   const filteredBlogs = mockBlogs.filter((b) =>
     b.title.toLowerCase().includes(searchQuery.toLowerCase()) ||

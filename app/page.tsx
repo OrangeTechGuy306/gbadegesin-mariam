@@ -16,14 +16,7 @@ import { Blog } from '@/components/blog';
 import { Contact } from '@/components/contact';
 import { Footer } from '@/components/footer';
 import { Chatbot } from '@/components/chatbot';
-import {
-  fallbackSkills,
-  fallbackProjects,
-  fallbackExperiences,
-  fallbackTestimonials,
-  fallbackBlogs,
-} from '@/lib/fallback-data';
-
+export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   let skills: any[] = [];
@@ -31,28 +24,30 @@ export default async function Home() {
   let experiences: any[] = [];
   let testimonials: any[] = [];
   let blogs: any[] = [];
+  let isDbConnected = false;
 
   try {
     const conn = await connectDB();
     if (conn) {
+      isDbConnected = true;
       skills = await Skill.find({}).lean();
       projects = await Project.find({}).sort({ createdAt: -1 }).lean();
       experiences = await Experience.find({}).sort({ startDate: -1 }).lean();
       testimonials = await Testimonial.find({}).sort({ createdAt: -1 }).lean();
       blogs = await BlogModel.find({ status: 'published' }).sort({ publishedAt: -1 }).lean();
     } else {
-      console.warn('Database connection is not available. Defaulting to local portfolio datasets.');
+      console.warn('Database connection is not available.');
     }
   } catch (err) {
-    console.error('Database connection or query failed in homepage. Loading static fallbacks. Error:', err);
+    console.error('Database connection or query failed in homepage. Error:', err);
   }
 
-  // Gracefully degrade to static/mock records if query is empty or failed
-  const finalSkills = skills && skills.length > 0 ? skills : fallbackSkills;
-  const finalProjects = projects && projects.length > 0 ? projects : fallbackProjects;
-  const finalExperiences = experiences && experiences.length > 0 ? experiences : fallbackExperiences;
-  const finalTestimonials = testimonials && testimonials.length > 0 ? testimonials : fallbackTestimonials;
-  const finalBlogs = blogs && blogs.length > 0 ? blogs : fallbackBlogs;
+  // Use live database records directly (defaulting to empty lists if query failed)
+  const finalSkills = skills;
+  const finalProjects = projects;
+  const finalExperiences = experiences;
+  const finalTestimonials = testimonials;
+  const finalBlogs = blogs;
 
   // Format items for safe client boundary passing
   const formattedSkills = finalSkills.map((s: any) => ({
