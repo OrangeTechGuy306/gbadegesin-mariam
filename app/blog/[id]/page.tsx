@@ -11,7 +11,8 @@ export const dynamic = 'force-dynamic';
 
 // Request-scoped cache to deduplicate database queries between metadata and rendering
 const getBlog = cache(async (id: string) => {
-  await connectDB();
+  const conn = await connectDB();
+  if (!conn) return null;
   if (mongoose.Types.ObjectId.isValid(id)) {
     return await Blog.findById(id).lean();
   }

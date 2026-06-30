@@ -7,7 +7,11 @@ import { ShieldAlert, Terminal, Clock, ShieldCheck } from 'lucide-react';
 
 async function getLogs() {
   try {
-    await connectDB();
+    const conn = await connectDB();
+    if (!conn) {
+      console.warn('Database connection failed in getLogs. Returning empty array.');
+      return [];
+    }
     const list = await AuditLog.find({}).sort({ createdAt: -1 }).limit(50);
     return JSON.parse(JSON.stringify(list));
   } catch (err) {

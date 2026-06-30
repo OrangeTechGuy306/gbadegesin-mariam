@@ -5,7 +5,11 @@ import { AdminTestimonialsManager } from '@/components/admin-testimonials-manage
 
 async function getTestimonials() {
   try {
-    await connectDB();
+    const conn = await connectDB();
+    if (!conn) {
+      console.warn('Database connection failed in getTestimonials. Returning empty array.');
+      return [];
+    }
     const list = await Testimonial.find({}).sort({ createdAt: -1 });
     return JSON.parse(JSON.stringify(list));
   } catch (err) {

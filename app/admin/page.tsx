@@ -9,7 +9,10 @@ import { AnalyticsCharts } from '@/components/analytics-charts';
 
 async function fetchStats() {
   try {
-    await connectDB();
+    const conn = await connectDB();
+    if (!conn) {
+      throw new Error('Database connection is not available');
+    }
     const totalViews = await Analytics.countDocuments();
     const projectCount = await Project.countDocuments();
     const blogCount = await Blog.countDocuments();

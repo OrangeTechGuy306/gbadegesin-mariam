@@ -5,7 +5,11 @@ import { AdminProjectsManager } from '@/components/admin-projects-manager';
 
 async function getProjects() {
   try {
-    await connectDB();
+    const conn = await connectDB();
+    if (!conn) {
+      console.warn('Database connection failed in getProjects. Returning empty array.');
+      return [];
+    }
     const list = await Project.find({}).sort({ createdAt: -1 });
     return JSON.parse(JSON.stringify(list)); // Serialize MongoDB object IDs
   } catch (err) {

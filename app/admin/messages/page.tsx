@@ -12,7 +12,10 @@ export default async function MessagesAdminPage() {
     redirect('/login?clear=1');
   }
 
-  await connectDB();
+  const conn = await connectDB();
+  if (!conn) {
+    throw new Error('Database connection is not available');
+  }
   const messages = await Message.find({}).sort({ createdAt: -1 }).lean();
 
   const formattedMessages = messages.map((m: any) => ({

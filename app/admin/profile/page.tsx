@@ -13,7 +13,10 @@ export default async function ProfileAdminPage() {
     redirect('/login?clear=1');
   }
 
-  await connectDB();
+  const conn = await connectDB();
+  if (!conn) {
+    throw new Error('Database connection is not available');
+  }
   const experiences = await Experience.find({}).sort({ startDate: -1 }).lean();
   const certifications = await Certification.find({}).sort({ issueDate: -1 }).lean();
 

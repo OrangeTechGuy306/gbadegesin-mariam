@@ -14,7 +14,10 @@ export default async function UsersAdminPage() {
     redirect('/admin');
   }
 
-  await connectDB();
+  const conn = await connectDB();
+  if (!conn) {
+    throw new Error('Database connection is not available');
+  }
   const users = await User.find({}).sort({ createdAt: -1 }).lean();
 
   const formattedUsers = users.map((u: any) => ({

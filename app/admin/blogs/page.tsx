@@ -5,7 +5,11 @@ import { AdminBlogsManager } from '@/components/admin-blogs-manager';
 
 async function getBlogs() {
   try {
-    await connectDB();
+    const conn = await connectDB();
+    if (!conn) {
+      console.warn('Database connection failed in getBlogs. Returning empty array.');
+      return [];
+    }
     const list = await Blog.find({}).sort({ createdAt: -1 });
     return JSON.parse(JSON.stringify(list));
   } catch (err) {

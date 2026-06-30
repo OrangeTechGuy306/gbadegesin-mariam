@@ -64,7 +64,8 @@ export async function getCurrentUser() {
     const session = await decrypt(sessionCookie);
     if (!session?.userId) return null;
 
-    await connectDB();
+    const conn = await connectDB();
+    if (!conn) return null;
     const user = await User.findById(session.userId).select('-password');
     if (!user) return null;
 
@@ -80,7 +81,10 @@ export async function getCurrentUser() {
         timestamp: h.timestamp.toISOString(),
       })),
     };
-  } catch (err) {
+  } catch (err: any) {
+    if (err && (err.digest === 'DYNAMIC_SERVER_USAGE' || err.message?.includes('Dynamic server usage'))) {
+      throw err;
+    }
     console.error('Failed to get current user:', err);
     return null;
   }

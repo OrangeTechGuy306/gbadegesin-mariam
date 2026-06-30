@@ -5,7 +5,11 @@ import { AdminSkillsManager } from '@/components/admin-skills-manager';
 
 async function getSkills() {
   try {
-    await connectDB();
+    const conn = await connectDB();
+    if (!conn) {
+      console.warn('Database connection failed in getSkills. Returning empty array.');
+      return [];
+    }
     const list = await Skill.find({}).sort({ category: 1, name: 1 });
     return JSON.parse(JSON.stringify(list));
   } catch (err) {
