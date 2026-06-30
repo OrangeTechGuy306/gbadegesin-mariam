@@ -55,7 +55,11 @@ async function connectDB() {
   } catch (e: any) {
     cached.promise = null;
     console.error('Failed to establish database connection:', e.message);
-    return null;
+    throw new Error(`Failed to establish database connection: ${e.message}`);
+  }
+
+  if (!cached.conn) {
+    throw new Error('Database connection is not available');
   }
 
   return cached.conn;
