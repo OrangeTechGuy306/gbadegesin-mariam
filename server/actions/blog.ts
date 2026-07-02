@@ -167,3 +167,61 @@ export async function addCommentAction(prevState: any, formData: FormData) {
     return { error: err.message || 'An error occurred' };
   }
 }
+
+export async function updateBlogAction(prevState: any, formData: FormData) {
+  const user = await getCurrentUser();
+  if (!user || (user.role !== 'SUPER_ADMIN' && user.role !== 'ADMIN' && user.role !== 'EDITOR')) {
+    return { error: 'Unauthorized operation' };
+  }
+
+  const id = formData.get('id')?.toString();
+  const title = formData.get('title')?.toString().trim();
+  const summary = formData.get('summary')?.toString().trim();
+  const content = formData.get('content')?.toString().trim();
+  const category = formData.get('category')?.toString() || 'General';
+  const coverImage = formData.get('coverImage')?.toString().trim();
+
+  if (!id || !title || !summary || !content) {
+    return { error: 'ID, Title, Summary, and Content are required' };
+  }
+
+  const slug = title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)+/g, '');
+
+  try {
+    await connectDB();
+    const blog = await Blog.findById(id);
+    if (!blog) {
+      return { error: 'Blog post not found' };
+    }
+
+    blog.title = title;
+    blog.slug = slug;
+    blog.summary = summary;
+    blog.content = content;
+    blog.category = category;
+    if (coverImage) blog.coverImage = coverImage;
+
+    await blog.save();
+
+    // Write to Audit Logs
+    await AuditLog.create({
+      userId: user.id,
+      userName: user.name,
+      userEmail: user.email,
+      action: 'UPDATE_BLOG',
+      details: `Updated blog article "${title}" (ID: ${id})`,
+      ip: '127.0.0.1',
+    });
+
+    revalidatePath('/');
+    revalidatePath('/admin/blogs');
+    revalidatePath(`/blog/${id}`);
+    return { success: 'Blog post updated successfully!' };
+  } catch (err: any) {
+    return { error: err.message || 'An error occurred' };
+  }
+}
+

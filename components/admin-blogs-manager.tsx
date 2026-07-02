@@ -1,8 +1,8 @@
 'use client';
 
 import * as React from 'react';
-import { Plus, Trash2, X, FileText } from 'lucide-react';
-import { createBlogAction, deleteBlogAction } from '@/server/actions/blog';
+import { Plus, Trash2, X, FileText, Edit3 } from 'lucide-react';
+import { createBlogAction, deleteBlogAction, updateBlogAction } from '@/server/actions/blog';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -24,6 +24,7 @@ interface AdminBlogsManagerProps {
 export function AdminBlogsManager({ initialBlogs }: AdminBlogsManagerProps) {
   const [blogs, setBlogs] = React.useState(initialBlogs);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [editingBlog, setEditingBlog] = React.useState<any | null>(null);
   const [error, setError] = React.useState<string | null>(null);
   const [success, setSuccess] = React.useState<string | null>(null);
 
@@ -37,12 +38,27 @@ export function AdminBlogsManager({ initialBlogs }: AdminBlogsManagerProps) {
   });
 
   const openAddModal = () => {
+    setEditingBlog(null);
     reset({
       title: '',
       summary: '',
       content: '',
       category: 'SQL Performance',
       coverImage: '',
+    });
+    setError(null);
+    setSuccess(null);
+    setIsModalOpen(true);
+  };
+
+  const openEditModal = (blog: any) => {
+    setEditingBlog(blog);
+    reset({
+      title: blog.title,
+      summary: blog.summary,
+      content: blog.content,
+      category: blog.category,
+      coverImage: blog.coverImage || '',
     });
     setError(null);
     setSuccess(null);
@@ -57,12 +73,18 @@ export function AdminBlogsManager({ initialBlogs }: AdminBlogsManagerProps) {
       if (v !== undefined) fd.append(k, v);
     });
 
-    const result = await createBlogAction(null, fd);
+    let result;
+    if (editingBlog) {
+      fd.append('id', editingBlog._id);
+      result = await updateBlogAction(null, fd);
+    } else {
+      result = await createBlogAction(null, fd);
+    }
 
     if (result.error) {
       setError(result.error);
     } else {
-      setSuccess(result.success || 'Blog published successfully!');
+      setSuccess(result.success || (editingBlog ? 'Blog post updated successfully!' : 'Blog published successfully!'));
       setTimeout(() => {
         setIsModalOpen(false);
         window.location.reload();
@@ -117,7 +139,14 @@ export function AdminBlogsManager({ initialBlogs }: AdminBlogsManagerProps) {
                 <td className="p-4 font-bold text-foreground truncate max-w-[200px]">{b.title}</td>
                 <td className="p-4"><span className="px-2 py-0.5 rounded bg-primary/10 text-primary font-bold text-[10px]">{b.category}</span></td>
                 <td className="p-4 text-muted-foreground font-semibold uppercase text-[10px]">{b.status}</td>
-                <td className="p-4 text-right">
+                <td className="p-4 text-right space-x-1.5">
+                  <button
+                    onClick={() => openEditModal(b)}
+                    className="p-1.5 rounded hover:bg-secondary text-primary transition-colors inline-flex"
+                    aria-label="Edit blog post"
+                  >
+                    <Edit3 className="w-3.5 h-3.5" />
+                  </button>
                   <button
                     onClick={() => handleDelete(b._id)}
                     className="p-1.5 rounded hover:bg-secondary text-destructive transition-colors inline-flex"
@@ -137,7 +166,9 @@ export function AdminBlogsManager({ initialBlogs }: AdminBlogsManagerProps) {
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-card w-full max-w-2xl max-h-[85vh] rounded-3xl overflow-y-auto border border-border shadow-2xl flex flex-col p-6 sm:p-8 space-y-6">
             <div className="flex justify-between items-center border-b border-border/40 pb-4">
-              <h3 className="text-sm font-bold text-foreground">Write Blog Article</h3>
+              <h3 className="text-sm font-bold text-foreground">
+                {editingBlog ? 'Edit Blog Article' : 'Write Blog Article'}
+              </h3>
               <button onClick={() => setIsModalOpen(false)} className="p-1.5 rounded-full hover:bg-secondary text-muted-foreground">
                 <X className="w-4 h-4" />
               </button>
@@ -207,7 +238,15 @@ export function AdminBlogsManager({ initialBlogs }: AdminBlogsManagerProps) {
                 className="w-full py-3 rounded-xl bg-primary text-primary-foreground font-semibold text-xs hover:opacity-90 transition-opacity flex items-center justify-center space-x-1 shadow-md"
               >
                 <FileText className="w-4 h-4" />
-                <span>{isSubmitting ? 'Publishing...' : 'Publish Article'}</span>
+                <span>
+                  {isSubmitting
+                    ? editingBlog
+                      ? 'Saving Changes...'
+                      : 'Publishing...'
+                    : editingBlog
+                    ? 'Save Changes'
+                    : 'Publish Article'}
+                </span>
               </button>
             </form>
           </div>
